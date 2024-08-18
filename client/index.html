@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurante - Seja bem-vindo!</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/fontawesome.css">
+    <link rel="stylesheet" href="./css/animate.css">
+    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/maindelivery.css">
+    <!-- <link rel="stylesheet" href="./css/responsivo.css"> -->
+
+</head>
+
+<body class="position-relative">
+    <div class="loader-full animated fadeIn hidden">
+        <img src="./img/logo.png" width="100" class="animated pulse infinite" />
+    </div>
+
+    <div class="background-cardapio"></div>
+
+    <div class="container-mensagens" id="container-mensagens"></div>
+
+    <a class="botao-carrinho animated bounceIn hidden  data-bs-target=#exampleModalToggle data-bs-toggle=modal" onclick="cardapio.metodos.abrirCarrinho(true)">
+        <div class="badge-total-carrinho">0</div>
+        <i class="fa fa-shopping-bag"></i>
+    </a>
+    
+    <section class="header">
+        
+        <div class="container mb-3">
+            <nav class="navbar navbar-expand-sm p-0">
+                <a class="navbar-brand wow m-2 fadeIn" href="#">
+                    
+                </a>
+
+                    <div class="d-flex">
+                        <img src="./img/logo.png" class="img-logo img-thumbnail rounded-5" width="120">&nbsp;&nbsp;&nbsp;
+                        <div class="infos">
+                            <h1><b id="lblNomeEmpresa"></b></h1>
+                            <div class="infos-sub">
+                                <p class="status-open hidden"><i class="fa fa-clock"></i> <span id="lblLojaAberta"></span></p>
+                                <a href="./sobre.html" class="link">&nbsp;&nbsp;&nbsp;ver mais</a>
+                            </div>
+                        </div>
+                    </div>
+        
+                
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarNavDropdown">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
+                    <ul class="navbar-nav gap-3 wow fadeIn">
+                        <li class="nav-item text-end">
+                            <a class="btn btn-white rounded-4 shadow p-3 pe-2 wow fadeIn"
+                                onclick="cardapio.metodos.abrirCarrinho(true)">
+                                Meu carrinho
+                                <span class="btn-icon position-relative p-2">
+                                    <span class="icon rounded-5 p-2 m-0">
+                                        <div class="container-total-carrinho badge-total-carrinho hidden">0</div>
+                                        <i class="fa fa-shopping-bag px-2"></i>
+                                    </span>
+                                </span>
+                            </a>
+                        </li>
+                        <li class="nav-item text-end">
+                            <a href="#cardapio" class="btn btn-white rounded-4 shadow p-3 wow fadeIn">Ver cardápio</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </section>
+    <div  class=" hidden" id="menu-bottom">
+    <section class="cardapio position-relative" id="cardapio">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center mb-2 wow fadeIn">
+                    <span class="hint-title"><b>Cardápio</b></span>
+                    <h1 class="title">
+                        <b>Conheça o nosso cardápio</b>
+                    </h1>
+                </div>
+            </div>
+            <div class="row">
+                <div
+                    class="col-12 d-flex g-2 gap-2 p-2 pb-4 flex-wrap container-menu wow fadeInUp justify-content-center">
+                </div>
+            </div>
+          
+            <div class="row row-cols-1 row-cols-lg-4 row-cols-md-3 mb-3 g-2" id="itensCardapio"></div>
+    
+    
+        </div>
+        <div class="row mb-3">
+            <div class="col-12 text-center wow fadeInUp">
+                <a id="btnVerMais" class="btn btn-white rounded-4 shadow" onclick="cardapio.metodos.verMais()">
+                    Ver mais
+                </a>
+            </div>
+        </div>
+   
+    </section>
+
+    <footer>
+       
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-3 col-md-3 col-sm-12 container-logo-footer wow fadeIn">
+                    <img class="logo-footer" src="./img/logo.png">
+                </div>
+                <div class="col-12 col-lg-6 col-md-6 col-sm-12 container-texto-footer wow fadeIn">
+                    <p class="mb-0">
+                        <b>Menu On-line</b> &copy; Todos os direitos reservados
+                    </p>
+                </div>
+                <div class="col-12 col-lg-3 col-md-3 col-sm-12 container-redes-footer wow fadeIn">
+                    <a class="btn btn-sm btn-white btn-social me-3">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a class="btn btn-sm btn-white btn-social me-3">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a class="btn btn-sm btn-white btn-social">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
+    <section class="menu-bottom animated fadeIn delay-05s disabled hidden" id="menu-bottom-closed">
+        <p class="mb-0"><b>Loja fechada no momento.</b></p>
+    </section>
+    <div class="modal fade" id="modalCarrinho" tabindex="-1" >
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg modal-fullscreen-lg-down">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 id="lblTituloEtapa" class="modal-title title-carrinho">Seu carrinho</h5>
+                    <button type="button" class="btn-close" onclick="cardapio.metodos.abrirCarrinho(false)"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row my-0">
+                        <div class="col-lg-6 col-sm-4 col-12 my-3">
+                            <div class="etapas">
+                                <div class="etapa etapa1 active">1</div>
+                                <div class="etapa etapa2">2</div>
+                                <div class="etapa etapa3">3</div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-sm-8 col-12 my-3">
+                            <div class="input-group">
+                                <span class="input-group-text">Tipo de comanda</span>
+                                <select id="selectTypeCommands" class="form-select"></select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container">
+                        <div id="itensCarrinho" class="row me-0 ms-0 animated fadeIn hidden"></div>
+                        <section class="opcionais my-2 hidden" id="opcionais">
+                            <div class="row">
+                                <div class="col-12 mb-3">
+                                    <span class="badge">Obrigatório</span>
+                                    <label for="nomeInfo" class="form-label">Como vamos te chamar?</label>
+                                    <input type="text" id="nomeInfo" class="form-control form-control-old mt-2"
+                                        placeholder="* Informe o nome e sobrenome">
+                                </div>
+                                <div class="col-lg-5 col-md-6 col-sm-7 col-12 mb-3">
+                                    <span class="badge">Obrigatório*</span>
+                                    <label for="foneInfo" class="form-label">Número do seu celular</label>
+                                    <input type="text" id="foneInfo" class="form-control form-control-old mt-2"
+                                        placeholder="(00) 0000-0000">
+                                    <div class="form-text sub-title-categoria">Para mais informações do pedido</div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section class="opcionais my-2 hidden" id="numeroMesa">
+                            <div id="mensagemMesa" class="mb-3"></div>
+                            <div class="col-lg-5 col-md-5 col-sm-6 col-12">
+                                <div class="input-group">
+                                    <span class="input-group-text">Mesa: </span>
+                                    <input type="text" id="txtnumeroMesa" class="form-control"
+                                        oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                                        placeholder="Sómente números">
+                                </div>
+                            </div>
+                        </section>
+
+                    
+                        <div id="localEntrega" class="row m-0 opcionais animated fadeIn hidden">
+                            <div class="col">
+                                <div class="row">
+                                    <div class="col-lg-4 col-sm-6 col-12 container-group mb-3">
+                                        <label for="txtCEP" class="form-label">CEP:</label>
+                                        <div class="input-group">
+                                            <input id="txtCEP" type="text" class="form-control form-control-old"
+                                                placeholder="12345-678">
+                                            <button type="button" class="btn btn-yellow px-3 input-group-append"
+                                                onclick="cardapio.metodos.buscarCep()">
+                                                <i class="fa fa-search"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col mb-3">
+                                        <span class="badge">Obrigatório</span>
+                                        <label for="txtEndereco" class="form-label">Endereço:</label>
+                                        <input id="txtEndereco" type="text" class="form-control form-control-old">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-8 col-12 mb-3">
+                                        <span class="badge">Obrigatório</span>
+                                        <label for="txtBairro" class="form-label">Bairro:</label>
+                                        <input id="txtBairro" type="text" class="form-control form-control-old">
+                                    </div>
+                                    <div class="col-md-4 col-12 mb-3">
+                                        <span class="badge">Obrigatório</span>
+                                        <label for="txtNumero" class="form-label">Número:</label>
+                                        <input id="txtNumero" type="text" class="form-control form-control-old">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-9 col-sm-8 col-12 mb-3">
+                                        <span class="badge">Obrigatório</span>
+                                        <label for="txtCidade" class="form-label">Cidade:</label>
+                                        <input id="txtCidade" type="text" class="form-control form-control-old">
+                                    </div>
+                                    <div class="col-md-3 col-sm-4 col-12 mb-3">
+                                        <span class="badge">Obrigatório</span>
+                                        <label for="ddlUf" class="form-label">UF:</label>
+                                        <select id="ddlUf" class="form-select form-control-old">
+                                            <option value="-1">...</option>
+                                            <option value="AC">AC</option>
+                                            <option value="AL">AL</option>
+                                            <option value="AP">AP</option>
+                                            <option value="AM">AM</option>
+                                            <option value="BA">BA</option>
+                                            <option value="CE">CE</option>
+                                            <option value="DF">DF</option>
+                                            <option value="ES">ES</option>
+                                            <option value="GO">GO</option>
+                                            <option value="MA">MA</option>
+                                            <option value="MT">MT</option>
+                                            <option value="MS">MS</option>
+                                            <option value="MG">MG</option>
+                                            <option value="PA">PA</option>
+                                            <option value="PB">PB</option>
+                                            <option value="PR">PR</option>
+                                            <option value="PE">PE</option>
+                                            <option value="PI">PI</option>
+                                            <option value="RJ">RJ</option>
+                                            <option value="RN">RN</option>
+                                            <option value="RS">RS</option>
+                                            <option value="RO">RO</option>
+                                            <option value="RR">RR</option>
+                                            <option value="SC">SC</option>
+                                            <option value="SP">SP</option>
+                                            <option value="SE">SE</option>
+                                            <option value="TO">TO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col mb-3">
+                                        <label for="txtComplemento" class="form-label">Complemento:</label>
+                                        <input id="txtComplemento" type="text" class="form-control form-control-old">
+                                        <div class="form-text">Este campo é opcional</div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col mb-3">
+                                        <label for="txtReferencia" class="form-label">Referência:</label>
+                                        <input id="txtReferencia" type="text" class="form-control form-control-old">
+                                        <div class="form-text">Este campo é opcional</div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div id="formaDePagamento"  class="form-group container-group mb-5  row m-0 opcionais animated fadeIn hidden">
+                            <span class="badge">Obrigatório</span>
+                            <p class="title-categoria mb-0"><b>Como você vai pagar?</b></p>
+                            <span class="sub-title-categoria">Pagamento na entrega</span>
+            
+                            <div class="card card-select mt-2  data-bs-target=#exampleModalToggle2 data-bs-toggle=modal" id="cardAddFormaPagamento" onclick="cardapio.metodos.abrirModalFormaPagamento()">
+                                <div class="infos-produto-opcional ">
+                                    <p class="form-control form-control-old mb-0 color-primary" id="formControlPagamento"><i class="fas fa-plus-circle"></i>&nbsp; Nenhuma forma selecionada</p>
+                                </div>
+                            </div>
+            
+                            <div class="card  card-address mt-2 hidden" id="cardFormaPagamentoSelecionada">
+                                <div class="img-icon-details" id="iconFormaPagamentoSelecionada">
+                                    <!-- <i class="fas fa-coins"></i> -->
+                                    <!-- <i class="fas fa-credit-card"></i> -->
+                                </div>
+                                <div class="infos">
+                                    <p class="form-control form-control-old"><b id="lblFormaPagamentoSelecionada"></b></p>
+                                    <span class="text mb-0" id="lblDescFormaPagamentoSelecionada"></span>
+                                </div>
+                                <div class="icon-edit " onclick="cardapio.metodos.abrirModalFormaPagamento()">
+                                    <i class="fas fa-pencil-alt"></i>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div id="resumoCarrinho" class="row me-0 ms-0 animated fadeIn hidden">
+                            <div class="col-12">
+                                <p class="title-carrinho mt-4">
+                                    <b>Itens do pedido:</b>
+                                </p>
+                            </div>
+                            <div class="col-12">
+                                <div class="row" id="listaItensResumo">
+
+                                </div>
+                            </div>
+                            <div class="col-12 item-carrinho resumo" id="itemCarrinhoResumo">
+                                <div class="container-group mb-5">
+                                    <p class="title-carrinho mt-4">
+                                        <b>Local da entrega:</b>
+                                    </p>
+                                    <div class="card card-address mt-2">
+                                        <div class="img-map">
+                                            <i class="fas fa-map-marked-alt"></i>
+                                        </div>
+                                        <div class="ms-2 flex-grow-1 dados-produto">
+                                            <p class="texto-endereco">
+                                                <b id="resumoEndereco"></b>
+                                            </p>
+                                            <p class="cidade-endereco" id="cidadeEndereco"></p>
+                                            <p class="cidade-endereco" id="resumoFormaPagamento"></p>
+                                            <p class="cidade-endereco" id="formaPagamento"></p> 
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="col-12 mb-2">
+                        <div class="row">
+                            <div class="col">
+                                <div class="row">
+                                    <div class="col-md-6 col-12 text-start">
+                                        <p class="mb-0">
+                                            <span>Subtotal:</span>
+                                            <span id="lblSubTotal">R$ 0,00</span>
+                                        </p>
+                                    </div>
+                                    <div class="col-md-6 col-12 tex-start text-md-center">
+                                        <p class="mb-0 texto-entrega">
+                                            <span><i class="fas fa-motorcycle"></i> Entrega:</span>
+                                            <span id="lblValorEntrega">+ R$ 0,00</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-6 text-end">
+                                <p class="mb-0 texto-total">
+                                    <span><b>Total:</b></span>
+                                    <span class="valor-total"><b id="lblValorTotal">R$ 0,00</b></span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <a onclick="cardapio.metodos.voltarEtapa()" class="btn btn-white me-3 shadow p-3 rounded-4 hidden"
+                        id="btnVoltar">Voltar</a>
+                    <a onclick="cardapio.metodos.carregarEndereco()" class="btn btn-yellow shadow p-3 rounded-4"
+                        id="btnEtapaPedido">Continuar</a>
+                    <a onclick="cardapio.metodos.resumoPedido()" class="btn btn-yellow shadow p-3 rounded-4 hidden"
+                        id="btnEtapaEndereco">Revisar pedido</a>
+                    <a href="#" class="btn btn-yellow shadow p-3 rounded-4 hidden" id="btnEtapaResumo"
+                        target="_blank">Enviar pedido</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalDetalhesEscolha" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-fullscreen-sm-down">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Detalhes do Item</h5>
+                    <button type="button" class="btn-close"></button>
+                </div>
+                <div class="modal-body">
+                    <section class="imagem width-fix">
+                        <div class="container-imagem-produto"
+                            style="background-image: url('./img/cardapio/burguers/burger-au-poivre-kit-4-pack.3ca0e39b02db753304cd185638dad518.jpg'); background-size: cover;">
+                        </div>
+                        <div class="card">
+                            <div class="d-flex">
+                                <div class="infos-produto">
+                                    <p class="name mb-2 nameProduct"><b>X-Calabresa salada </b></p>
+                                    <p class="description dscProduct mb-4"> hamburger mussarela, calabresa, alface e
+                                        tomate</p>
+                                    <p class="price priceProduct"><b>R$ 39,90</b></p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="opcionais width-fix mt-5 pb-3">
+                        <div id="divOpcionais">
+                            <p class="title-categoria mb-0"><b>Adicionais</b></p>
+                            <!-- <span class="sub-title-categoria">Escolha até 2 opções</span> -->
+                            <div id="itensOpcionais" class="container-group mb-5"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <label for="obsProduct" class="form-label title-categoria"><b>Observações</b></label>
+                                <textarea id="obsProduct" class="form-control form-control-old" rows="5"
+                                    placeholder="Exemplo: Tirar cebolas"></textarea>
+                                <span class="form-text sub-title-categoria">Este campo é opcional</span>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <div class="modal-footer p-0">
+                    <section class="col-12 d-flex align-items-center p-2 m-0 menu-bottom details">
+                        <div class="input-group align-items-center">
+                            <button class="btn btn-menos rounded-start-5"><i class="fas fa-minus"></i></button>
+                            <span class="px-3 add-numero-itens text-center">1</span>
+                            <button class="btn btn-mais rounded-end-5"><i class="fas fa-plus"></i></button>
+                        </div>
+                        <button type="button" class="btn btn-yellow shadow rounded-5 text-nowrap btn-save">
+                            Adicionar <span class="ms-2" id="priceTotal">R$ 0</span>
+                        </button>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalMessage" tabindex="-1" data-bs-backdrop="static" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Confirmação de ação</h4>
+                    <button type="button" class="btn-close"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="message text-left">Mensagem para o usuário</p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary confirmYes">Sim</button>
+                    <button class="btn btn-danger confirmNo">Não</button>
+                </div>
+            </div>
+        </div>
+    </div>
+  <!-- Modal actions Pagamento -->
+<div class="modal fade" id="modalActionsFormaPagamento" tabindex="-1" aria-labelledby="modalLabel" >
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalLabel">Forma de Pagamento</h5>
+         
+          </div>
+    <div class="width-fix container-modal-actions">
+        <!-- Formas de pagamento serão inseridas aqui -->
+    </div>
+    <div class="modal-footer">
+    
+      </div>
+    </div>
+    <div class="backdrop" onclick="cardapio.metodos.fecharModalActionsFormaPagamento()"></div>
+</div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script type="text/javascript" src="./js/modernizr-3.5.0.min.js"></script>
+    <script type="text/javascript" src="./js/jquery.mask-1.14.16.min.js"></script>
+    <script type="text/javascript" src="./js/wow.min.js"></script>
+    <script type="module" src="./js/dados.js"></script>
+    <script type="module" src="./js/app.js"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <script>
+        new WOW().init();
+    </script>
+
+</body>
+
+</html>
